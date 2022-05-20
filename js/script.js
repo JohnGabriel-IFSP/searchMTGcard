@@ -1,3 +1,12 @@
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker
+      .register("/servicework.js")
+      .then((res) => console.log("service worker registered"))
+      .catch((err) => console.log("service worker not registered", err));
+  });
+}
+
 async function searchCard(cardName) {
   const data = await fetch(
     `https://api.magicthegathering.io/v1/cards?name=${cardName}`
@@ -57,7 +66,12 @@ function showCard(card) {
   );
 
   const image = document.createElement("img");
+  image.id = "cardImage";
   image.src = card.imageUrl;
+
+  const btnFullscreen = document.createElement("button");
+  btnFullscreen.id = "fullscreen-image";
+  btnFullscreen.textContent = "Expandir";
 
   nameElement.appendChild(name);
   flavorElement.appendChild(flavor);
@@ -66,10 +80,16 @@ function showCard(card) {
   informations.appendChild(flavorElement);
 
   imageContainer.appendChild(image);
+  imageContainer.appendChild(btnFullscreen);
 
   const searchContainer = document.getElementById("search-container");
   document.body.insertBefore(imageContainer, searchContainer);
   document.body.insertBefore(informations, imageContainer);
+
+  $("#fullscreen-image").addEventListener(
+    "click",
+    goFullscreenHandler($("#cardImage"))
+  );
 }
 
 function removePreviousCard() {

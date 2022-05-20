@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTG</title>
-    <link href="style.css" rel="stylesheet">
+    <title>sMTGc</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png" />
+    <meta name="apple-mobile-web-app-status-bar" content="#b980ee" />
+    <meta name="theme-color" content="#8a2be2" />
 </head>
 <body>
     <h1>Search Magic the Gathering Card</h1>
     <div class="search-container">
         <input type="text" id="cardName" placeholder="ex: Lyra Dawnbringer"/>
         <div>
-            <button type="submit" id="btnSearch">Buscar</button>
+            <button type="submit" id="btnSearch"> Buscar </button>
+            <button id="download"> Download </button>
         </div>
     </div>
-     <script src="script.js"></script> 
+    <script src="js/script.js"></script>
+    <script src="js/fullscreen.js"></script>
+    <script src="js/install.js"></script> 
 </body>
 </html>
