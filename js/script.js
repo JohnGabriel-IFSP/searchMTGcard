@@ -8,19 +8,32 @@ if ("serviceWorker" in navigator) {
 }
 
 async function searchCard(cardName) {
-  const data = await fetch(
-    `https://api.magicthegathering.io/v1/cards?name=${cardName}`
-  );
-  const cardObject = await data.json();
+  // const data = await fetch(
+  //   `https://api.magicthegathering.io/v1/cards?name=${cardName}`
+  // );
+  // const cardObject = await data.json();
 
-  if (Object.keys(cardObject.cards).length === 0) {
-    alert("Carta não encontrada!");
-    searchCard("Miscast");
-  }
+  // if (Object.keys(cardObject.cards).length === 0) {
+  //   alert("Carta não encontrada!");
+  //   searchCard("Miscast");
 
-  cardObject.cards.map((card) => {
-    if (card.imageUrl != null) return showCard(card);
-  });
+  fetch(`https://api.magicthegathering.io/v1/cards?name=${cardName}`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+    })
+    .then((cardObject) => {
+      cardObject.cards.map((card) => {
+        if (card.imageUrl != null) return showCard(card);
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      fetch("card404.json")
+        .then((response) => response.json())
+        .then((json) => showCard(json));
+    });
 }
 
 let cardName = document.getElementById("cardName");
