@@ -4,9 +4,9 @@ const assets = [
   "/index.html",
   "/manifest.json",
   "/css/style.css",
-  "/js/script.js",
-  "/js/fullscreen",
+  "/js/fullscreen.js",
   "js/install.js",
+  "/js/script.js",
 ];
 
 self.addEventListener("install", (e) => {
